@@ -1,0 +1,52 @@
+void controlActuators() {
+if(gasLevel > GAS_THRESHOLD) {
+   digitalWrite(VALVE1_PIN, LOW);
+   digitalWrite(VALVE2_PIN, LOW);
+   digitalWrite(PUMP_PIN, HIGH);
+   Serial.println("Высокий уровень 
+газа: Насос включен,клапаны
+закрыты.");
+}else{
+ digitalWrite(VALVE1_PIN, HIGH);
+ digitalWrite(VALVE2_PIN, HIGH);
+ digitalWrite(PUMP_PIN, LOW);
+Serial.println("Низкий уровень 
+газа: Насос выключен,клапаны
+открыты.");
+}
+if (temparature >
+TEMPARATURE_THRESHOLD) {
+digitalWrite(PUMP_PIN, LOW);
+digitalWrite(VALVE1_PIN, LOW);
+digitalWrite(VALVE2_PIN, LOW);
+Serial.println("Перегрев: Все 
+актуаторы отключены для 
+безопасности.");
+}
+if (pressure >
+PRESSURE_THRESHOLD) {
+ digitalWrite(VALVE1_PIN, HIGH);
+ digitalWrite(VALVE2_PIN, LOW);
+   Serial.println("Высокое 
+давление: Клапан 1 открыт для 
+сброса давления");
+}
+void calibrateSensors() {
+Serial.println("Начало калибровки датчиков...");
+Serial.println("Калибровка завершена.");
+}
+
+void logData() {
+  Serial.println("----- Лог системы
+-----");
+  Serial.print("Время: "); Serial.println(millis());
+  Serial.print("Температура: "); Serial.print(temperature); Serial.println(" C");
+  Serial.print("Кислород: "); Serial.print(oxygen); Serial.println(" %");
+  Serial.print("Уровень газа: "); Serial.println(gasLevel);
+  Serial.print("Давление: "); Serial.print(pressure); Serial.println(" bar");
+  Serial.print("Состояние клапана 1: "); Serial.println(digitalRead(VALVE1_PIN) ? "Открыт" : "Закрыт");
+  Serial.print("Состояние клапана 2: "); Serial.println(digitalRead(VALVE2_PIN) ? "Открыт" : "Закрыт");
+  Serial.print("Насос: "); Serial.println(digitalRead(PUMP_PIN) ? "Включен" : "Выключен");
+  Serial.println("-----------------------");
+}
+
