@@ -5,7 +5,7 @@ if(gasLevel > GAS_THRESHOLD) {
    digitalWrite(PUMP_PIN, HIGH);
    Serial.println("Высокий уровень 
 газа: Насос включен,клапаны
-закрыты.");
+закрыты."); 
 }else{
  digitalWrite(VALVE1_PIN, HIGH);
  digitalWrite(VALVE2_PIN, HIGH);
